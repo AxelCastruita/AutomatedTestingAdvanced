@@ -103,7 +103,7 @@ namespace AutomationFramework.Utilities
             }
             else if (status == NUnit.Framework.Interfaces.TestStatus.Passed)
             {
-                test.Fail("TEST PASS");
+                test.Pass("TEST PASS");
             }
 
             extent.Flush();
