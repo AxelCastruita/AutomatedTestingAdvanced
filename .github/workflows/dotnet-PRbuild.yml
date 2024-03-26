@@ -4,22 +4,23 @@ on:
   pull_request:
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  build-and-run:
+    runs-on: windows-latest
     
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
     
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1 # Use the .NET core version required by your project
+        dotnet-version: '3.1' # Replace with your .NET version
       
     - name: Restore Dependencies
-      run: dotnet restore
+      run: dotnet restore Task2/AutomationFramework/AutomationFramework.csproj
 
-    - name: Run Tests
-      run: |
-        cd Task2/AutomationFramework
-        dotnet test AutomationFramework.csproj
+    - name: Build
+      run: dotnet build Task2/AutomationFramework/AutomationFramework.csproj --configuration Release --no-restore
+
+    - name: Test
+      run: dotnet test Task2/AutomationFramework/AutomationFramework.csproj --no-build --verbosity normal
