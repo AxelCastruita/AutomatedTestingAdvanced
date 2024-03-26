@@ -1,0 +1,25 @@
+name: Run Tests on PR
+
+on:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1 # Use the .NET core version required by your project
+      
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    - name: Run Tests
+      run: |
+        cd Task2/AutomationFramework
+        dotnet test AutomationFramework.csproj
